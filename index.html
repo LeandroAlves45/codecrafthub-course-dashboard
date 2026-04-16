@@ -215,7 +215,7 @@
       }
 
       .btn-primary {
-        background: var(--primary);
+        background: #8B5CF6;
         color: var(--white);
         box-shadow: 0 2px 6px rgba(139, 92, 246, 0.3);
       }
@@ -224,14 +224,12 @@
         box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
       }
 
-      .btn-success,
-      .btn-sucess {
-        background: var(--success);
+      .btn-success {
+        background: #F59E0B;
         color: var(--white);
         box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);
       }
-      .btn-success:hover:not(:disabled),
-      .btn-sucess:hover:not(:disabled) {
+      .btn-success:hover:not(:disabled) {
         background: #d97706;
         box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
       }
@@ -254,13 +252,13 @@
         background: #fde68a;
       }
 
-      .btn-delete {
+      .btn-danger {
         background: var(--danger);
         color: var(--white);
         padding: 6px 12px;
         font-size: 0.78rem;
       }
-      .btn-delete:hover:not(:disabled) {
+      .btn-danger:hover:not(:disabled) {
         background: #dc2626;
       }
 
@@ -670,7 +668,7 @@
               <button type="button" class="btn-ghost" id="resetBtn">
                 Clear
               </button>
-              <button type="submit" class="btn-sucess" id="addBtn">
+              <button type="submit" class="btn-success" id="addBtn">
                 <span>&#43;</span> Add Course
               </button>
             </div>
@@ -760,7 +758,7 @@
               <button type="button" class="btn-ghost" id="cancelEdit">
                 Cancel
               </button>
-              <button type="submit" class="btn-sucess" id="saveEditBtn">
+              <button type="submit" class="btn-success" id="saveEditBtn">
                 Save Changes
               </button>
             </div>
@@ -893,7 +891,7 @@
           .map(function (c) {
             var delBtn = deletingIds.has(String(c.id))
               ? '<span class="spinner" style="border-top-color:#991B1B;width:13px;height:13px;border-width:2px;"></span>'
-              : "&#128465; Remove";
+              : "Remove";
             return (
               '<tr data-id="' +
               esc(c.id) +
@@ -923,11 +921,11 @@
               '<button class="btn-edit" onclick="openEdit(\'' +
               esc(c.id) +
               "')\">&#9998; Edit</button>" +
-              '<button class="btn-delete" id="del-' +
+              '<button class="btn-danger" onclick="handleDelete(\'' +
               esc(c.id) +
-              '" onclick="deleteCourse(\'' +
+              '\')" id="del-' +
               esc(c.id) +
-              "')\">" +
+              '">' +
               delBtn +
               "</button>" +
               "</td></tr>"
@@ -1088,7 +1086,7 @@
           });
       });
 
-      function deleteCourse(id) {
+      function handleDelete(id) {
         if (!confirm("Remove this course? This action cannot be undone."))
           return;
 
